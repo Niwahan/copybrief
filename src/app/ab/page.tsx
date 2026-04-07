@@ -275,7 +275,7 @@ export default function AbPage() {
 
           <div className="grid gap-4 md:grid-cols-2">
             {(["versionA", "versionB"] as const).map((key) => {
-              const v = state.result[key];
+              const v = state.result[key] as ScoredEmailVersion;
               const vs = VERSION_STYLES[v.version];
               return (
                 <div key={key} className="rounded-xl border border-zinc-200 bg-white overflow-hidden">
