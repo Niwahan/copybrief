@@ -75,7 +75,7 @@ export interface CompareEmailsRequest {
 }
 
 export interface CompareEmailsResponse {
-  versionA: Scit oredEmailVersion;
+  versionA: ScoredEmailVersion;
   versionB: ScoredEmailVersion;
   recommendation: "A" | "B" | "tie";
   recommendationReason: string;

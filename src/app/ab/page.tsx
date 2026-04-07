@@ -274,11 +274,10 @@ export default function AbPage() {
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            {(["versionA", "versionB"] as const).map((key) => {
-              const v = state.result[key] as ScoredEmailVersion;
-              const vs = VERSION_STYLES[v.version];
+            {[state.result.versionA, state.result.versionB].map((v) => {
+              const vs = VERSION_STYLES[v.version as keyof typeof VERSION_STYLES];
               return (
-                <div key={key} className="rounded-xl border border-zinc-200 bg-white overflow-hidden">
+                <div key={v.version} className="rounded-xl border border-zinc-200 bg-white overflow-hidden">
                   <div className={`h-1 ${vs.bar}`} />
                   <div className="p-5 space-y-4">
                     <div>
