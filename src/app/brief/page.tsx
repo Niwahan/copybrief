@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import type { BrandBrief, BriefSection, GenerateBriefResponse, GenerateBriefError } from "@/lib/types";
 
 type PageState =
@@ -47,19 +47,19 @@ export default function BriefPage() {
   const [showManual, setShowManual] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  let stepInterval: ReturnType<typeof setInterval> | null = null;
+  const stepInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function startLoadingCycle() {
     let step = 0;
     setState({ status: "loading", step });
-    stepInterval = setInterval(() => {
+    stepInterval.current = setInterval(() => {
       step = (step + 1) % LOADING_STEPS.length;
       setState({ status: "loading", step });
     }, 2_500);
   }
 
   function stopLoadingCycle() {
-    if (stepInterval) { clearInterval(stepInterval); stepInterval = null; }
+    if (stepInterval.current) { clearInterval(stepInterval.current); stepInterval.current = null; }
   }
 
   async function handleSubmit(e: { preventDefault(): void }) {
