@@ -13,7 +13,7 @@ const client = new OpenAI({
 
 const MODEL = "openrouter/auto";
 
-export async function callGemini<T>(prompt: string): Promise<T> {
+export async function callAI<T>(prompt: string): Promise<T> {
   const response = await client.chat.completions.create({
     model: MODEL,
     temperature: 0.3,

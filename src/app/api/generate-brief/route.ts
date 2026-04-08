@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { callGemini } from "@/lib/gemini";
+import { callAI } from "@/lib/ai";
 import type { BrandBrief, GenerateBriefRequest, GenerateBriefResponse, GenerateBriefError } from "@/lib/types";
 
 export const runtime = "nodejs";
@@ -110,7 +110,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const brief = await callGemini<BrandBrief>(buildBriefPrompt(content));
+    const brief = await callAI<BrandBrief>(buildBriefPrompt(content));
     return NextResponse.json<GenerateBriefResponse>({ brief });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";

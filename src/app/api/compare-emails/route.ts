@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { callGemini } from "@/lib/gemini";
+import { callAI } from "@/lib/ai";
 import { scoreEmail } from "@/lib/scoring";
 import type {
   AIEmailScores, CompareEmailsError, CompareEmailsRequest,
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
   };
 
   try {
-    aiResult = await callGemini(buildComparisonPrompt(
+    aiResult = await callAI(buildComparisonPrompt(
       versionA.subject ?? "", versionA.body, hA,
       versionB.subject ?? "", versionB.body, hB
     ));

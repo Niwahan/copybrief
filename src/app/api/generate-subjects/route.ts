@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { callGemini } from "@/lib/gemini";
+import { callAI } from "@/lib/ai";
 import type {
   GenerateSubjectsRequest,
   GenerateSubjectsResponse,
@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
   const context = body.context?.trim().slice(0, 300);
 
   try {
-    const result = await callGemini<{ subjects: SubjectLineOption[] }>(
+    const result = await callAI<{ subjects: SubjectLineOption[] }>(
       buildSubjectPrompt(emailBody, context)
     );
     return NextResponse.json<GenerateSubjectsResponse>({ subjects: result.subjects });
